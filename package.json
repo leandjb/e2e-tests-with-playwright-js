@@ -1,25 +1,26 @@
 {
   "name": "e2e-tests-with-playwright",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dbg": "npx playwright test --debug"
+    "dbg": "npx playwright test --debug",
+    "pw": "npx playwright test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/leandjb/e2e-tests-with-playwright-js.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "GNUv3",
+  "author": "Leandro Barros <ingleandrobarros@outlook.com>",
+  "license": "MIT",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/leandjb/e2e-tests-with-playwright-js/issues"
   },
   "homepage": "https://github.com/leandjb/e2e-tests-with-playwright-js#readme",
   "devDependencies": {
-    "@playwright/test": "^1.57.0",
-    "@types/node": "^25.0.6"
+    "@playwright/test": "1.57.0",
+    "@types/node": "25.0.6"
   }
 }
