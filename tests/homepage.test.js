@@ -43,7 +43,7 @@ describe("Seleniumbase Homepage Test Suite", () => {
         await expect(page.locator("input[name='preText2']")).toHaveValue("Words added later!");
     })
     
-    test.only('@regression button green-purple TC', async function ({page}) {
+    test('@regression button green-purple TC', async function ({page}) {
         await page.goto("/demo_page/");
 
         await expect.soft(page.locator("//td[text()='Button:']")).toHaveText('Button:');
