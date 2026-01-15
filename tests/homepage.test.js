@@ -1,11 +1,11 @@
 import { expect, test } from "@playwright/test";
-import { afterEach, describe } from "node:test";
+import { assert } from "console";
+import { describe } from "node:test";
 
-// afterEach()
+describe("Seleniumbase Homepage Test Suite", () => {
 
-describe("Selenium Base Homepage", () => {
+    test("@regression Text Input Field TC", async function ({ page }) {
 
-    test("Text Input Field Testcase", async ({ page }) => {
         //Arrange
         await page.goto("/demo_page/");
         await expect.soft(page.locator("//td[contains(text(), 'Text Input Field:')]")).toHaveText("Text Input Field:");
@@ -20,9 +20,10 @@ describe("Selenium Base Homepage", () => {
         await expect(page.locator("#myTextInput")).toHaveValue("I'm testing a input text with Playwright!");
     });
 
-    test("Textarea Testcase", async ({ page }) => {
+    test("@regression Textarea TC", async ({ page }) => {
         await page.goto("/demo_page/");
         await expect.soft(page.locator("//td[text()='Textarea:']")).toHaveText("Textarea:");
+        await expect.soft(page.locator("//td[text()='Textarea:']")).toBeVisible();
 
         await page.locator("#myTextarea").fill("I'm testing a text area with Playwright!")
 
@@ -31,4 +32,15 @@ describe("Selenium Base Homepage", () => {
         await expect.soft(page.locator("#myTextarea")).toBeEditable();
         await expect(page.locator("#myTextarea")).toHaveValue("I'm testing a text area with Playwright!");
     });
+
+    test('@regression Pre-Filled Text Field TC', async function ({ page }) {
+        await page.goto("/demo_page/");
+        await expect.soft(page.locator("//td[text()='Pre-Filled Text Field:']")).toHaveText("Pre-Filled Text Field:");
+        await expect.soft(page.locator("//td[text()='Pre-Filled Text Field:']")).toBeVisible();
+
+        await page.locator("input[name='preText2']").fill("Words added later!");
+
+        await expect(page.locator("input[name='preText2']")).toBeVisible();
+        await expect(page.locator("input[name='preText2']")).toHaveValue("Words added later!");
+    })
 })
