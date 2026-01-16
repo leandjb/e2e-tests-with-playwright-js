@@ -36,14 +36,14 @@ describe("Seleniumbase Homepage Test Suite", () => {
         await page.goto("/demo_page/");
         await expect.soft(page.locator("//td[text()='Pre-Filled Text Field:']")).toHaveText("Pre-Filled Text Field:");
         await expect.soft(page.locator("//td[text()='Pre-Filled Text Field:']")).toBeVisible();
-        
+
         await page.locator("input[name='preText2']").fill("Words added later!");
-        
+
         await expect(page.locator("input[name='preText2']")).toBeVisible();
         await expect(page.locator("input[name='preText2']")).toHaveValue("Words added later!");
     })
-    
-    test('@regression button green-purple TC', async function ({page}) {
+
+    test('@regression button green-purple TC', async function ({ page }) {
         await page.goto("/demo_page/");
 
         await expect.soft(page.locator("//td[text()='Button:']")).toHaveText('Button:');
@@ -52,20 +52,43 @@ describe("Seleniumbase Homepage Test Suite", () => {
         await expect.soft(page.locator("//td[text()='Read-Only Text Field:']")).toBeVisible();
         await expect.soft(page.locator("//p[text()='Paragraph with Text:']")).toHaveText('Paragraph with Text:');
         await expect.soft(page.locator("//p[text()='Paragraph with Text:']")).toBeVisible();
-        
+
         await expect.soft(page.locator("#myButton")).toHaveText("Click Me (Green)");
-        await expect.soft(page.locator("#myButton")).toHaveCSS('color','rgb(0, 128, 0)');
+        await expect.soft(page.locator("#myButton")).toHaveCSS('color', 'rgb(0, 128, 0)');
         await expect.soft(page.locator("#readOnlyText")).toHaveValue("The Color is Green");
         await expect.soft(page.locator("#ptext")).toHaveText("This Text is Green");
-        
+
         await expect.soft(page.locator("//button[contains(text(),'Click Me')]")).toBeEnabled();
-        await page.locator("//button[contains(text(),'Click Me')]").click(); 
+        await page.locator("//button[contains(text(),'Click Me')]").click();
 
         //final asserts
         await expect(page.locator("#myButton")).toHaveText("Click Me (Purple)");
-        await expect(page.locator("#myButton")).toHaveCSS('color','rgb(128, 0, 128)');
+        await expect(page.locator("#myButton")).toHaveCSS('color', 'rgb(128, 0, 128)');
         await expect(page.locator("#readOnlyText")).toHaveValue("The Color is Purple");
-        await expect(page.locator("#ptext")).toHaveText("This Text is Purple");   
-        
+        await expect(page.locator("#ptext")).toHaveText("This Text is Purple");
+
     })
+
+    test.only('@regression Hover Dropdown TC', async function ({ page }) {
+        await page.goto("/demo_page/");
+
+        await expect.soft(page.locator("//div[text()='Hover Dropdown']")).toBeVisible()
+        await expect.soft(page.locator("//div[@class='dropdown-content']")).not.toBeVisible();
+        
+        await page.locator("//div[text()='Hover Dropdown']").hover();
+        await expect.soft(page.locator("//div[@class='dropdown-content']")).toBeVisible();
+        await page.locator("//a[@onclick='clickLink3()']").click();
+        await expect(page.locator("//h3")).toHaveText("Link Three Selected");
+        
+        await page.locator("//div[text()='Hover Dropdown']").hover();
+        await expect.soft(page.locator("//div[@class='dropdown-content']")).toBeVisible();
+        await page.locator("//a[@onclick='clickLink2()']").click();
+        await expect(page.locator("//h3")).toHaveText("Link Two Selected");
+        
+        await page.locator("//div[text()='Hover Dropdown']").hover();
+        await expect.soft(page.locator("//div[@class='dropdown-content']")).toBeVisible();
+        await page.locator("//a[@onclick='clickLink1()']").click();
+        await expect(page.locator("//h3")).toHaveText("Link One Selected");
+    })
+
 })
