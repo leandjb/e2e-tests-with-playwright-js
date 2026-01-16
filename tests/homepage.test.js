@@ -69,7 +69,7 @@ describe("Seleniumbase Homepage Test Suite", () => {
 
     })
 
-    test.only('@regression Hover Dropdown TC', async function ({ page }) {
+    test('@regression Hover Dropdown TC', async function ({ page }) {
         await page.goto("/demo_page/");
 
         await expect.soft(page.locator("//div[text()='Hover Dropdown']")).toBeVisible()
