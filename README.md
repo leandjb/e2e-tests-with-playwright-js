@@ -1,8 +1,10 @@
 # e2e-tests-with-playwright Project
+[![Playwright Tests](https://github.com/leandjb/e2e-tests-with-playwright-js/actions/workflows/playwright.yml/badge.svg?branch=main&event=push)](https://github.com/leandjb/e2e-tests-with-playwright-js/actions/workflows/playwright.yml)
 
 This project utilizes **Playwright** framework to automate end-to-end web applications. It focuses on validating the functionality of web components.
 
 ---
+
 
 ## Description
 
