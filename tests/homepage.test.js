@@ -74,21 +74,33 @@ describe("Seleniumbase Homepage Test Suite", () => {
 
         await expect.soft(page.locator("//div[text()='Hover Dropdown']")).toBeVisible()
         await expect.soft(page.locator("//div[@class='dropdown-content']")).not.toBeVisible();
-        
+
         await page.locator("//div[text()='Hover Dropdown']").hover();
         await expect.soft(page.locator("//div[@class='dropdown-content']")).toBeVisible();
         await page.locator("//a[@onclick='clickLink3()']").click();
         await expect(page.locator("//h3")).toHaveText("Link Three Selected");
-        
+
         await page.locator("//div[text()='Hover Dropdown']").hover();
         await expect.soft(page.locator("//div[@class='dropdown-content']")).toBeVisible();
         await page.locator("//a[@onclick='clickLink2()']").click();
         await expect(page.locator("//h3")).toHaveText("Link Two Selected");
-        
+
         await page.locator("//div[text()='Hover Dropdown']").hover();
         await expect.soft(page.locator("//div[@class='dropdown-content']")).toBeVisible();
         await page.locator("//a[@onclick='clickLink1()']").click();
         await expect(page.locator("//h3")).toHaveText("Link One Selected");
     })
 
-})
+    test('@regression HTML SVG ', async function ({ page }) {
+        const svg_image_locator = page.locator("#svgRect");
+        const svg_name_locator = page.locator("//td[text()='HTML SVG with rect:']");
+
+        await page.goto("/demo_page/");
+        await expect.soft(svg_name_locator).toHaveText("HTML SVG with rect:");
+        await expect.soft(svg_image_locator).toBeVisible();
+        await expect.soft(svg_image_locator).toHaveAttribute('stroke', 'teal');
+        
+        await svg_image_locator.click();
+        await expect(svg_image_locator).toBeEnabled();
+    })
+});
