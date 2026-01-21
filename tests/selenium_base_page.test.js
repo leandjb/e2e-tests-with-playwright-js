@@ -61,7 +61,7 @@ describe("Seleniumbase Homepage Test Suite", () => {
         await expect.soft(page.locator("//button[contains(text(),'Click Me')]")).toBeEnabled();
         await page.locator("//button[contains(text(),'Click Me')]").click();
 
-        //final asserts
+        //asserts
         await expect(page.locator("#myButton")).toHaveText("Click Me (Purple)");
         await expect(page.locator("#myButton")).toHaveCSS('color', 'rgb(128, 0, 128)');
         await expect(page.locator("#readOnlyText")).toHaveValue("The Color is Purple");
@@ -99,8 +99,33 @@ describe("Seleniumbase Homepage Test Suite", () => {
         await expect.soft(svg_name_locator).toHaveText("HTML SVG with rect:");
         await expect.soft(svg_image_locator).toBeVisible();
         await expect.soft(svg_image_locator).toHaveAttribute('stroke', 'teal');
-        
+
         await svg_image_locator.click();
         await expect(svg_image_locator).toBeEnabled();
+    })
+
+    test('', async ({ page }) => {
+        //Arranges
+        await page.goto("/demo_page/");
+        await page.waitForLoadState('domcontentloaded')
+        await expect(page).toHaveTitle("Web Testing Page");
+        await expect(page).toHaveURL("https://seleniumbase.io/demo_page/");
+
+        await page.locator("#progressBar").highlight();
+        await expect.soft(page.locator("#progressBar")).toHaveAttribute('value', '50')
+        await page.locator("#mySlider").highlight();
+        await expect.soft(page.locator("#mySlider")).toBeVisible();
+        await page.locator("#mySlider").press("ArrowRight")
+
+        //Acts
+        await expect.soft(page.locator("#progressBar")).toHaveAttribute('value', '60')
+        await page.locator("#mySlider").press("ArrowLeft")
+        await page.locator("#mySlider").press("ArrowLeft")
+        await page.locator("#mySlider").press("ArrowLeft")
+        await page.locator("#mySlider").press("ArrowLeft")
+
+
+        //Asserts
+        await expect(page.locator("#progressBar")).toHaveAttribute('value', '20');
     })
 });
