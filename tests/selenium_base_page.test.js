@@ -91,7 +91,7 @@ describe("Seleniumbase Homepage Test Suite", () => {
         await expect(page.locator("//h3")).toHaveText("Link One Selected");
     })
 
-    test('@regression HTML SVG ', async function ({ page }) {
+    test('@regression HTML SVG TC', async function ({ page }) {
         const svg_image_locator = page.locator("#svgRect");
         const svg_name_locator = page.locator("//td[text()='HTML SVG with rect:']");
 
@@ -104,7 +104,7 @@ describe("Seleniumbase Homepage Test Suite", () => {
         await expect(svg_image_locator).toBeEnabled();
     })
 
-    test('', async ({ page }) => {
+    test('@regression Input Slider Control TC', async ({ page }) => {
         //Arranges
         await page.goto("/demo_page/");
         await page.waitForLoadState('domcontentloaded')
